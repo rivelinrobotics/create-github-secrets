@@ -32,7 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### :sparkles: Added 
 
  - Adds initial create-github-secrets Action
- - Adds support for creating and updating Repository Secrets
  - Adds support for creating and updating Environment Secrets
  - Adds README
  - Adds LICENSE

@@ -4,13 +4,11 @@ This action creates (or updates) a set of GitHub secrets using the GitHub API.
 
 In order to use the action, a Personal Access Token must be created with the following scopes:
 
-    - Environments: `read-write`
-    - Secrets `read-write`
+    - Environments: read-write
+    - Secrets read-write
 
 Currently, the action supports:
 
-- Creation of a set of Secrets in a Repository (if the Secrets do not exist)
-- Updation of a set of Secrets in a Repository (if the Secrets do exist)
 - Creation of a set of Secrets in an Environment of a Repository (if the Secrets do not exist)
 - Updation of a set of Secrets in an Environment of a Repository (if the Secrets do exist)
 
@@ -19,7 +17,7 @@ Currently, the action supports:
 | *Input*           | *Type*  | *Required* | *Default* | *Description*                                |
 |-------------------|---------|------------|-----------|----------------------------------------------|
 | repository        | string  | yes        |           | The name `org/repo` of the Repository        |
-| environment       | string  | no         | Empty     | The name of an Environment in the Repository |
+| environment       | string  | yes        |           | The name of an Environment in the Repository |
 | secrets           | string  | yes        |           | Secrets of the form `k1=v1 k2=v2 ...`        |
 | token             | string  | yes        |           | A PAT with permissions to update Secrets     |
 

@@ -20,10 +20,10 @@ def github_headers(token: str) -> Dict[str, str]:
     }
 
 
-def get_public_key(base_url: str, token: str) -> Tuple[str, bytes]:
-    """Returns the public key and its ID."""
-    url = f"{base_url}/secrets/public-key"
-    response = requests.get(url=url, headers=github_headers(token))
+def get_public_key(environment_url: str, token: str) -> Tuple[str, bytes]:
+    """Returns the public key and its ID for an Environment."""
+    public_key_url = f"{environment_url}/secrets/public-key"
+    response = requests.get(url=public_key_url, headers=github_headers(token))
     key = response.json()["key"].encode("utf-8")
     return response.json()["key_id"], key
 
@@ -37,17 +37,17 @@ def encrypt_secret(secret: str, public_key: bytes) -> str:
 
 
 def create_secret(base_url: str, token: str, public_key_id: str, secret_name: str, secret_value: bytes) -> None:
-    """Creates a secret in the repository."""
-    url = f"{base_url}/secrets/{secret_name}"
+    """Creates a Secret in an Environment."""
+    secret_url = f"{base_url}/secrets/{secret_name}"
     payload = {"encrypted_value": secret_value, "key_id": public_key_id}
-    requests.put(url=url, headers=github_headers(token), json=payload)
+    requests.put(url=secret_url, headers=github_headers(token), json=payload)
 
 
 if __name__ == "__main__":
     repository, environment, token, secrets = sys.argv[1:]
-    suffix = f"/environments/{environment}" if environment else ""
-    github_url = f"https://api.github.com/repositories/{repository}{suffix}"
-    public_key_id, public_key = get_public_key(github_url, token)
+    base_url = "https://api.github.com"
+    environment_url = f"{base_url}/repositories/{repository}/environment/{environment}"
+    public_key_id, public_key = get_public_key(environment_url, token)
     for secret_name, secret_value in parse_secrets(secrets).items():
         encrypted_secret = encrypt_secret(secret_value, public_key)
-        create_secret(github_url, token, public_key_id, secret_name, encrypted_secret)
+        create_secret(environment_url, token, public_key_id, secret_name, encrypted_secret)

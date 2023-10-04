@@ -6,8 +6,7 @@ inputs:
     required: true
   environment:
     description: The name of the Environment to update
-    required: false
-    default: ""
+    required: true
   token:
     description: A PAT with permissions to update Secrets
     required: true
