@@ -16,7 +16,7 @@ Currently, the action supports:
 
 | *Input*           | *Type*  | *Required* | *Default* | *Description*                                |
 |-------------------|---------|------------|-----------|----------------------------------------------|
-| repository        | string  | yes        |           | The name `org/repo` of the Repository        |
+| repository        | string  | yes        |           | The ID of the Repository                     |
 | environment       | string  | yes        |           | The name of an Environment in the Repository |
 | secrets           | string  | yes        |           | Secrets of the form `k1=v1 k2=v2 ...`        |
 | token             | string  | yes        |           | A PAT with permissions to update Secrets     |
@@ -35,7 +35,7 @@ jobs:
       - name: Update Secrets
         uses: rivelinrobotics/update-github-secrets@v1
         with:
-          repository: organisation/repository
+          repository: ${{ github.repository_id }}
           environment: Development
           token: ${{ secrets.REPOSITORY_PAT }}
           secrets: >
