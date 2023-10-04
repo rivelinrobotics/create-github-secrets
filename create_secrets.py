@@ -46,7 +46,7 @@ def create_secret(base_url: str, token: str, public_key_id: str, secret_name: st
 if __name__ == "__main__":
     repository, environment, token, secrets = sys.argv[1:]
     suffix = f"/environments/{environment}" if environment else ""
-    github_url = f"https://api.github.com/repositories/{repo}{suffix}"
+    github_url = f"https://api.github.com/repositories/{repository}{suffix}"
     public_key_id, public_key = get_public_key(github_url, token)
     for secret_name, secret_value in parse_secrets(secrets).items():
         encrypted_secret = encrypt_secret(secret_value, public_key)
