@@ -1,0 +1,24 @@
+---
+name: Lint Code
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install Linting Tools
+        run: pip3 install -r requirements-dev.txt
+      - name: Lint Code
+        run: |
+          black --check --line-length 120
+          isort --check --profile black

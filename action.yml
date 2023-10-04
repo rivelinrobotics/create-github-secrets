@@ -1,0 +1,24 @@
+name: rivelinrobotics/create-github-secrets
+description: Creates (or updates) a set of GitHub secrets using the GitHub API
+inputs:
+  repository:
+    description: The name of the Repository to update
+    required: true
+  environment:
+    description: The name of the Environment to update
+    required: false
+    default: ""
+  token:
+    description: A PAT with permissions to update Secrets
+    required: true
+  secrets:
+    description: Secrets of the form `k1=v1 k2=v2 ...`
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.repository }}
+    - ${{ inputs.environment }}
+    - ${{ inputs.token }}
+    - ${{ inputs.secrets }}
