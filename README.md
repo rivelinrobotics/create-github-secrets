@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update Secrets
-        uses: rivelinrobotics/update-github-secrets@v1
+        uses: rivelinrobotics/update-github-secrets@v1.0.0
         with:
           repository: ${{ github.repository_id }}
           environment: Development
