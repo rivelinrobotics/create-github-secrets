@@ -8,7 +8,7 @@ from nacl import encoding, public
 
 def parse_secrets(secrets: str) -> Dict[str, str]:
     """Parses secrets of the form `k1=v1 k2=v2 ...` to a dict."""
-    return dict(secret.split("=") for secret in secrets.split())
+    return dict(secret.split("=", maxsplit=1) for secret in secrets.split())
 
 
 def github_headers(token: str) -> Dict[str, str]:
