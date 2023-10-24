@@ -36,9 +36,7 @@ def encrypt_secret(secret: str, public_key: bytes) -> str:
     return base64.b64encode(encrypted_value).decode("utf-8")
 
 
-def create_secret(
-    base_url: str, token: str, public_key_id: str, secret_name: str, secret_value: bytes
-) -> None:
+def create_secret(base_url: str, token: str, public_key_id: str, secret_name: str, secret_value: bytes) -> None:
     """Creates a Secret in an Environment."""
     secret_url = f"{base_url}/secrets/{secret_name}"
     payload = {"encrypted_value": secret_value, "key_id": public_key_id}
@@ -52,6 +50,4 @@ if __name__ == "__main__":
     public_key_id, public_key = get_public_key(environment_url, token)
     for secret_name, secret_value in parse_secrets(secrets).items():
         encrypted_secret = encrypt_secret(secret_value, public_key)
-        create_secret(
-            environment_url, token, public_key_id, secret_name, encrypted_secret
-        )
+        create_secret(environment_url, token, public_key_id, secret_name, encrypted_secret)
