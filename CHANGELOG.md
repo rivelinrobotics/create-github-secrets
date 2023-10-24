@@ -27,7 +27,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
  - Bug fixes go here
 
-## [1.0.0] - 2024-10-04
+## [1.0.1] - 2023-10-24
+
+### :wrench: Fixed
+
+ - Allows parsing of secrets that contain equals characters in the value
+
+## [1.0.0] - 2023-10-04
 
 ### :sparkles: Added 
 
