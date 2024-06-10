@@ -49,7 +49,7 @@ if __name__ == "__main__":
     print(repositories)
     base_url = "https://api.github.com"
     for repository in repositories.split():
-        environment_url = f"{base_url}/repos/{repository}/environments/{environment}"
+        environment_url = f"{base_url}/repos/rivelinrobotics/{repository}/environments/{environment}"
         public_key_id, public_key = get_public_key(environment_url, token)
         for secret_name, secret_value in parse_secrets(secrets).items():
             encrypted_secret = encrypt_secret(secret_value, public_key)
