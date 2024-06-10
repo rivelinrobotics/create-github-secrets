@@ -24,6 +24,7 @@ def get_public_key(environment_url: str, token: str) -> Tuple[str, bytes]:
     """Returns the public key and its ID for an Environment."""
     public_key_url = f"{environment_url}/secrets/public-key"
     response = requests.get(url=public_key_url, headers=github_headers(token))
+    print(response)
     key = response.json()["key"].encode("utf-8")
     return response.json()["key_id"], key
 
@@ -45,6 +46,7 @@ def create_secret(base_url: str, token: str, public_key_id: str, secret_name: st
 
 if __name__ == "__main__":
     repositories, environment, token, secrets = sys.argv[1:]
+    print(repositories)
     base_url = "https://api.github.com"
     for repository in repositories.split():
         environment_url = f"{base_url}/repos/{repository}/environments/{environment}"
