@@ -47,6 +47,7 @@ def create_secret(base_url: str, token: str, public_key_id: str, secret_name: st
 
 if __name__ == "__main__":
     repositories, environment, token, secrets = sys.argv[1:]
+    print(repositories)
     base_url = "https://api.github.com"
     for repository in repositories.split(" "):
         environment_url = f"{base_url}/repos/{repository}/environments/{environment}"
