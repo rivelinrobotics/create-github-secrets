@@ -5,27 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - yyyy-mm-dd
+## [2.0.0] - 2024-10-06
 
 ### :sparkles: Added 
 
- - New features go here
-
-### :pencil2: Changed
-
- - Changes in existing functionality go here
-
-### :warning: Deprecated
-
- - Soon-to-be removed features go here
+ - `repositories` argument added accepting a space separated list of repository names
 
 ### :no_entry_sign: Removed
 
- - Now removed features go here
-
-### :wrench: Fixed
-
- - Bug fixes go here
+ - `repository` argument removed in favour of `repositories`
 
 ## [1.0.1] - 2023-10-24
 
