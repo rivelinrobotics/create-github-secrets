@@ -44,10 +44,11 @@ def create_secret(base_url: str, token: str, public_key_id: str, secret_name: st
 
 
 if __name__ == "__main__":
-    repository, environment, token, secrets = sys.argv[1:]
+    repositories, environment, token, secrets = sys.argv[1:]
     base_url = "https://api.github.com"
-    environment_url = f"{base_url}/repositories/{repository}/environments/{environment}"
-    public_key_id, public_key = get_public_key(environment_url, token)
-    for secret_name, secret_value in parse_secrets(secrets).items():
-        encrypted_secret = encrypt_secret(secret_value, public_key)
-        create_secret(environment_url, token, public_key_id, secret_name, encrypted_secret)
+    for repository in repositories.split():
+        environment_url = f"{base_url}/repos/rivelinrobotics/{repository}/environments/{environment}"
+        public_key_id, public_key = get_public_key(environment_url, token)
+        for secret_name, secret_value in parse_secrets(secrets).items():
+            encrypted_secret = encrypt_secret(secret_value, public_key)
+            create_secret(environment_url, token, public_key_id, secret_name, encrypted_secret)
