@@ -14,12 +14,12 @@ Currently, the action supports:
 
 ## Action Inputs
 
-| *Input*           | *Type*  | *Required* | *Default* | *Description*                                |
-|-------------------|---------|------------|-----------|----------------------------------------------|
-| repository        | string  | yes        |           | The ID of the Repository                     |
-| environment       | string  | yes        |           | The name of an Environment in the Repository |
-| secrets           | string  | yes        |           | Secrets of the form `k1=v1 k2=v2 ...`        |
-| token             | string  | yes        |           | A PAT with permissions to update Secrets     |
+| *Input*           | *Type*  | *Required* | *Default* | *Description*                                  |
+|-------------------|---------|------------|-----------|------------------------------------------------|
+| repositories      | string  | yes        |           | The names of the Repositories, space delimited |
+| environment       | string  | yes        |           | The name of an Environment in each Repository  |
+| secrets           | string  | yes        |           | Secrets of the form `k1=v1 k2=v2 ...`          |
+| token             | string  | yes        |           | A PAT with permissions to update Secrets       |
 
 ## Action Outputs
 
@@ -33,9 +33,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update Secrets
-        uses: rivelinrobotics/update-github-secrets@v1.0.0
+        uses: rivelinrobotics/create-github-secrets@v2.0.0
         with:
-          repository: ${{ github.repository_id }}
+          repositories: >
+            repository_1
+            repository_2
+            repository_3
           environment: Development
           token: ${{ secrets.REPOSITORY_PAT }}
           secrets: >
