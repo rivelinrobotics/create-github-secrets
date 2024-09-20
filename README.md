@@ -30,7 +30,7 @@ This Action does not generate any outputs.
 1. Navigate to Organization > Settings > GitHub Apps
 2. Create a new App with the following settings:
    - <b>scopes</b>: secrets: write
-   - <b>redirect_url<b>: https://www.rivelinrobotics.com
+   - <b>redirect_url</b>: https://www.rivelinrobotics.com
    - <b>webhooks</b>: disabled
 3. Install the App with the following settings:
    - Repository level
