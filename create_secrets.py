@@ -1,6 +1,6 @@
 import base64
 import sys
-from typing import Dict, Tuple, List
+from typing import Dict, List, Tuple
 
 import requests
 from nacl import encoding, public
