@@ -23,6 +23,7 @@ runs:
         with:
           python-version: 3.12
       - name: Install Python Packages
+        shell: bash
         run: pip3 install -r requirements.txt
       - name: Create Token to Write Secrets
         id: token
@@ -32,6 +33,7 @@ runs:
           private-key: ${{ inputs.private-key }}
           repositories: ${{ inputs.repositories }}
       - name: Write Secrets
+        shell: bash
         run: |
           python3 create_secrets.py \
             ${{ inputs.repositories }} \
