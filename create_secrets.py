@@ -1,14 +1,14 @@
 import base64
 import sys
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 
 import requests
 from nacl import encoding, public
 
 
-def parse_secrets(secrets: str) -> Dict[str, str]:
+def parse_secrets(secrets: List[str]) -> Dict[str, str]:
     """Parses secrets of the form `k1=v1,k2=v2 ...` to a dict."""
-    return dict(secret.split("=", maxsplit=1) for secret in secrets.split(","))
+    return dict(secret.split("=", maxsplit=1) for secret in secrets)
 
 
 def github_headers(token: str) -> Dict[str, str]:
@@ -44,8 +44,8 @@ def create_secret(base_url: str, token: str, public_key_id: str, secret_name: st
 
 
 if __name__ == "__main__":
-    print(sys.argv)
-    repositories, environment, token, secrets = sys.argv[1:]
+    repositories, environment, token = sys.argv[1:4]
+    secrets = sys.argv[4:]
     base_url = "https://api.github.com"
     for repository in repositories.split(","):
         environment_url = f"{base_url}/repos/rivelinrobotics/{repository}/environments/{environment}"
