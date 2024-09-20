@@ -41,7 +41,7 @@ This Action does not generate any outputs.
    - The App ID should be saved as `<APP_NAME>_APP_ID`
    - The App Private Key should be saved as `<APP_NAME>_PRIVATE_KEY`
 
-## Example Usage
+## Example Usage (with a GitHub App)
 
 ```yaml
 jobs:
