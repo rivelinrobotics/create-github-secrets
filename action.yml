@@ -5,7 +5,8 @@ inputs:
     description: The ID of the GitHub App
     required: true
   private-key:
-    description: The private key of the GitHub App 
+    description: The private key of the GitHub App
+    required: true
   repositories:
     description: The names of the Repositories to update
     required: true
