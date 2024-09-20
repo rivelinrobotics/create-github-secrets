@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Modifies action to generate GitHub App Token internally
 - `repositories` argument now takes a comma separated list
+- `secrets` argument now takes a comma separated list
 
 ## [2.0.0] - 2024-06-10
 
