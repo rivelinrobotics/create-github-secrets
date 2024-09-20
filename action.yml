@@ -34,9 +34,9 @@ runs:
         run: pip3 install requests==2.31.0 pynacl==1.5.0
       - name: Write Secrets
         shell: bash
-        run: |
-          python3 ${{ github.action_path }}/create_secrets.py \
-            ${{ inputs.repositories }} \
-            ${{ inputs.environment }} \
-            ${{ steps.token.outputs.token}} \
-            ${{ inputs.secrets }}
+        run: >
+          python3 ${{ github.action_path }}/create_secrets.py
+          ${{ inputs.repositories }}
+          ${{ inputs.environment }}
+          ${{ steps.token.outputs.token }}
+          ${{ inputs.secrets }}
