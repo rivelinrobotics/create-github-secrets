@@ -30,7 +30,7 @@ Currently, the action supports:
 | private-key       | string  | yes        |           | The Private Key of a GitHub App with the above permissions |
 | repositories      | string  | yes        |           | The names of the Repositories, comma delimited             |
 | environment       | string  | yes        |           | The name of an Environment in each Repository              |
-| secrets           | string  | yes        |           | Secrets of the form `k1=v1 k2=v2 ...`                      |
+| secrets           | string  | yes        |           | Secrets of the form `k1=v1,k2=v2,k3=v3 ...`                |
 
 ## Action Outputs
 
@@ -50,5 +50,5 @@ jobs:
           private-key: ${{ secrets.<APP_NAME>_PRIVATE_KEY }}
           repositories: repository_1,repository_2
           environment: Development
-          secrets: SECRET_1=FOO SECRET_2=BAR
+          secrets: SECRET_1=FOO,SECRET_2=BAR
 ```
