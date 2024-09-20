@@ -2,7 +2,7 @@
 
 This action creates (or updates) a set of GitHub secrets using the GitHub API.
 
-In order to use the action, a Personal Access Token must be created with the following scopes:
+In order to use the action, a Personal Access Token or GitHub App must be created with the following scopes:
 
     - Environments: read-write
     - Secrets read-write
@@ -25,6 +25,22 @@ Currently, the action supports:
 
 This Action does not generate any outputs.
 
+##
+
+## Configuring a GitHub App for Authentication
+
+1. Navigate to Organization > Settings > GitHub Apps
+2. Create a new App with the following settings:
+   - <b>scopes</b>: secrets: write
+   - <b>redirect_url<b>: https://www.rivelinrobotics.com
+   - <b>webhooks</b>: disabled:
+3. Install the App with the following settings:
+   - Repository level
+   - Install to each repository whose secrets you want to write to
+4. Save the App Credentials as secrets in the repository calling the action:
+   - The App ID should be saved as `<APP_NAME>_APP_ID`
+   - The App Private Key should be saved as `<APP_NAME>_PRIVATE_KEY`
+
 ## Example Usage
 
 ```yaml
@@ -32,7 +48,17 @@ jobs:
   update-secrets:
     runs-on: ubuntu-latest
     steps:
-      - name: Update Secrets
+      - name: Fetch Token for Access to Write Secrets
+        id: token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.<APP_NAME>_APP_ID }}
+          private-key: ${{ secrets.<APP_NAME>_PRIVATE_KEY }}
+          repositories: >
+            repository_1,
+            repository_2,
+            repository_3
+      - name: Update Secrets in other Repositories
         uses: rivelinrobotics/create-github-secrets@v2.0.0
         with:
           repositories: >
@@ -40,7 +66,7 @@ jobs:
             repository_2
             repository_3
           environment: Development
-          token: ${{ secrets.REPOSITORY_PAT }}
+          token: ${{ steps.token.outputs.token }}
           secrets: >
             SECRET_1=FOO
             SECRET_2=BAR
