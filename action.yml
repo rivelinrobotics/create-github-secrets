@@ -1,23 +1,40 @@
 name: rivelinrobotics/create-github-secrets
 description: Creates (or updates) a set of GitHub secrets using the GitHub API
 inputs:
+  app-id:
+    description: The ID of the GitHub App
+    required: true
+  private-key:
+    description: The private key of the GitHub App 
   repositories:
     description: The names of the Repositories to update
     required: true
   environment:
     description: The name of the Environment to update
     required: true
-  token:
-    description: A PAT with permissions to update Secrets
-    required: true
   secrets:
     description: Secrets of the form `k1=v1 k2=v2 ...`
     required: true
 runs:
-  using: docker
-  image: Dockerfile
-  args:
-    - ${{ inputs.repositories }}
-    - ${{ inputs.environment }}
-    - ${{ inputs.token }}
-    - ${{ inputs.secrets }}
+  using: composite
+  steps:
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - name: Install Python Packages
+        run: pip3 install -r requirements.txt
+      - name: Create Token to Write Secrets
+        id: token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ inputs.app-id }}
+          private-key: ${{ inputs.private-key }}
+          repositories: ${{ inputs.repositories }}
+      - name: Write Secrets
+        run: |
+          python3 create_secrets.py \
+            ${{ inputs.repositories }} \
+            ${{ inputs.environment }} \
+            ${{ steps.token.outputs.token}} \
+            ${{ inputs.secrets }}
