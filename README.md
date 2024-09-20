@@ -25,8 +25,6 @@ Currently, the action supports:
 
 This Action does not generate any outputs.
 
-##
-
 ## Configuring a GitHub App for Authentication
 
 1. Navigate to Organization > Settings > GitHub Apps
