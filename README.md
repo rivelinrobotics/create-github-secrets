@@ -33,13 +33,14 @@ This Action does not generate any outputs.
 2. Create a new App with the following settings:
    - <b>scopes</b>: secrets: write
    - <b>redirect_url<b>: https://www.rivelinrobotics.com
-   - <b>webhooks</b>: disabled:
+   - <b>webhooks</b>: disabled
 3. Install the App with the following settings:
    - Repository level
    - Install to each repository whose secrets you want to write to
-4. Save the App Credentials as secrets in the repository calling the action:
+4. Save the App secrets in the repository using this action:
+   - Generate a Private Key for the App (at the bottom of the App Settings)
    - The App ID should be saved as `<APP_NAME>_APP_ID`
-   - The App Private Key should be saved as `<APP_NAME>_PRIVATE_KEY`
+   - The Private Key should be saved as `<APP_NAME>_PRIVATE_KEY`
 
 ## Example Usage (with a GitHub App)
 
